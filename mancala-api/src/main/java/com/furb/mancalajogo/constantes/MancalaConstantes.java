@@ -1,6 +1,6 @@
 package com.furb.mancalajogo.constantes;
 
-public class KalahaConstants {
+public class MancalaConstantes {
     public static final int leftPitHouseId = 14;
     public static final int totalPits = 14;
     public static final int rightPitHouseId = 7;
