@@ -5,15 +5,17 @@ import com.furb.mancalajogo.constantes.MancalaConstantes;
 import com.furb.mancalajogo.model.MancalaBuraco;
 import com.furb.mancalajogo.model.MancalaJogo;
 import com.furb.mancalajogo.model.PartidaJogador;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MancalaSemeacaoService implements MancalaSemeacaoAPI {
-	// This method perform sowing the jogo on specific pit index
+	
     @Override
     public MancalaJogo semeia(MancalaJogo jogo, int indiceCasa) {
-        // No movement on House pits
+    
         if (indiceCasa == MancalaConstantes.rightPitHouseId || indiceCasa == MancalaConstantes.leftPitHouseId)
             return jogo;
-        // we set the player turn for the first move of the jogo based on the pit id
+        
         if (jogo.getPartidaJogador() == null) {
             if (indiceCasa < MancalaConstantes.rightPitHouseId)
             	jogo.setPartidaJogador(PartidaJogador.JogadorA);
@@ -60,9 +62,7 @@ public class MancalaSemeacaoService implements MancalaSemeacaoAPI {
         }
         // It's the last stone and we need to check the opposite player's pit status
         MancalaBuraco  buracoOposto = jogo.getBuraco(MancalaConstantes.totalPits - casaIndiceAtual);
-        // we are sowing the last stone and the current player's pit is empty but the opposite pit is not empty, therefore,
-        // we collect the opposite's Pit stones plus the last stone and add them to the House Pit of current player and
-        // make the opposite Pit empty
+        
         if (buracoSelecionado.isEmpty() && !buracoOposto.isEmpty()) {
             Integer pedrasOpostas = buracoOposto.getPedras();
             buracoOposto.clear();

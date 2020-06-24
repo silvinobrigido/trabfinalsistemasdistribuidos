@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Api(value = "Mancala game API. Set of endpoints for Creating and Sowing the Game")
 public class MancalaController {
 
-    @Autowired
+    @Autowired	
     private MancalaService mancalaService;
 
     @Autowired

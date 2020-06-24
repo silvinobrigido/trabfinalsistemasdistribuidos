@@ -9,7 +9,9 @@ import com.furb.mancalajogo.excecoes.RecursoNaoEncontradoException;
 import com.furb.mancalajogo.model.MancalaJogo;
 import com.furb.mancalajogo.repository.MancalaRepositorioJogo;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MancalaService implements MancalaApi{
     @Autowired
 	private MancalaRepositorioJogo repositorio;
