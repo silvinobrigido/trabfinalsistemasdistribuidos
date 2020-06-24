@@ -1,7 +1,7 @@
 package com.furb.mancala.web.constants;
 
 public class MancalaConstantes {
-    public static final int emptyStone = 0;
+    public static final int pedraZero = 0;
     public static final int leftPitHouseId = 14;
     public static final int rightPitHouseId = 7;
 

@@ -15,7 +15,7 @@ import java.util.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Document(collection = "games")
+@Document(collection = "jogo")
 @Setter
 @Getter
 public class MancalaJogo implements Serializable{

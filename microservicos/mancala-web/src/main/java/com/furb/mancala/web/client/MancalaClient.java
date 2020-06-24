@@ -10,9 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-/*
-    This class performs the api invocation for the web client
- */
+
 @Component
 @Slf4j
 public class MancalaClient {

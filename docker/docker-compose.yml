@@ -11,7 +11,7 @@ services:
     container_name: "furb_mancala_mongodb"
     ports:
       - "27017:27017"
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    command: mongod --smallfiles --logpath=/dev/null 
 
   redisdb:
     restart: always

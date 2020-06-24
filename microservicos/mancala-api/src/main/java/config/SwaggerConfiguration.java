@@ -20,7 +20,7 @@ public class SwaggerConfiguration {
     public Docket apiDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.dzone.mancala.game.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.furb.mancalajogo.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(getApiInfo());

@@ -22,7 +22,7 @@ public class MancalaClientConfig {
     public String getNewMancalaGameUrl(){
         ServiceInstance instance = this.loadBalancer.choose(apiServiceId);
 
-        String url = String.format("http://%s:%s/games", instance.getHost(), instance.getPort());
+        String url = String.format("http://%s:%s/jogo", instance.getHost(), instance.getPort());
 
         return url;
     }

@@ -32,19 +32,19 @@ public class MainView extends VerticalLayout {
 		this.mancalaJogoComponent = MancalaJogoComponent;
 		this.jogoController = jogoController;
 
-		// build the game information layout
-		this.startGameBtn = new Button("Inicar Jogo");
+		
+		this.startGameBtn = new Button("Iniciar Jogo");
 		this.gameIdLabel = new Label("Código de Jogo:");
 		this.gameIdTextField = new TextField("", "", "");
 		this.gameIdTextField.setReadOnly(true);
 		this.gameIdTextField.setMinLength(50);
 
-		// build layout for game id
+		
 		HorizontalLayout gameIdLayout = new HorizontalLayout(gameIdLabel, gameIdTextField);
 		gameIdLayout.setAlignItems(Alignment.CENTER);
 		add(gameIdLayout);
 
-		// adding the game itself
+		
 		add(MancalaJogoComponent);
 
 		// build layout for actions

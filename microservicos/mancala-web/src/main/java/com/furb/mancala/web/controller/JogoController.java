@@ -8,9 +8,7 @@ import com.furb.mancala.web.model.MancalaJogo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
-/*
-    This class acts as Controller for the web application
- */
+
 @Component
 public class JogoController {
 
@@ -29,18 +27,18 @@ public class JogoController {
             return this.jogo;
 
         }catch (Exception e){
-            throw new ApiConnectionException("Error connecting to Mancala service!");
+            throw new ApiConnectionException("Não foi possível se conectar ao serviço! \n" + e.getMessage() );
         }
     }
 
-    public void sow(Integer pitIndex) throws ApiConnectionException {
+    public void semeia(Integer indiceBuraco) throws ApiConnectionException {
         try {
-            this.jogo = cliente.semeaJogoMancala(this.jogo.getId(), pitIndex);
+            this.jogo = cliente.semeaJogoMancala(this.jogo.getId(), indiceBuraco);
 
-            this.eventPublisher.publishEvent(new SemeaEvento(this, this.jogo, pitIndex));
+            this.eventPublisher.publishEvent(new SemeaEvento(this, this.jogo, indiceBuraco));
 
         }catch (Exception ex){
-            throw new ApiConnectionException("Error connecting to Mancala service!");
+            throw new ApiConnectionException("Não foi possível se conectar ao serviço! \n" + ex.getMessage() );
         }
     }
 

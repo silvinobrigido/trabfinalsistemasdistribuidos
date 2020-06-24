@@ -1,19 +1,3 @@
-/**
- * Copyright 2019 Esfandiyar Talebi
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.furb.mancala.web.view;
 
 import com.furb.mancala.web.controller.JogoController;
@@ -88,16 +72,16 @@ public class BuracoComponent extends VerticalLayout {
         btn.setTabIndex(indiceBuraco);
         btn.addClickListener(e -> {
             if (!this.jogoController.jogoIniciado()){
-                Notification.show("Please click on 'Start Game' button to start the game first!");
+                Notification.show("Inicie o jogo!");
                 return;
             }
 
-            Notification.show(e.getSource().getTabIndex() + " Clicked");
+            Notification.show(e.getSource().getTabIndex() + " ");
             try {
-                this.jogoController.sow(e.getSource().getTabIndex());
+                this.jogoController.semeia(e.getSource().getTabIndex());
             } catch (ApiConnectionException ex) {
                 log.error(ex.getMessage(), ex);
-                Notification.show("Error connecting to the server!. Try later");
+                Notification.show("Erro ao conectar ao servidor");
             }
         });
     }
