@@ -12,44 +12,44 @@ import static com.furb.mancala.web.constants.MancalaConstantes.*;
 public class MancalaJogo {
     private String id;
     private String partidaJogador;
-    private List <MancalaBuraco> buracos;
+    private List <MancalaCova> covas;
 
     @JsonIgnore
-    public Integer getPedrasJogadorA(){
-        return getBuraco(firstPitPlayerA).getPedras() +
-                getBuraco(secondPitPlayerA).getPedras() +
-                getBuraco(thirdPitPlayerA).getPedras()+
-                getBuraco(forthPitPlayerA).getPedras()+
-                getBuraco(fifthPitPlayerA).getPedras()+
-                getBuraco(sixthPitPlayerA).getPedras();
+    public Integer getSementesJogadorA(){
+        return getCova(primeiraCovaJogadorA).getSementes() +
+               getCova(segundaCovaJogadorA).getSementes()  +
+               getCova(terceiraCovaJogadorA).getSementes() +
+               getCova(quartaCovaJogadorA).getSementes()   +
+               getCova(quintaCovaJogadorA).getSementes()   +
+               getCova(sextaCovaJogadorA).getSementes();
     }
 
     @JsonIgnore
-    public Integer getPedrasJogadorB() {
-        return getBuraco(firstPitPlayerB).getPedras() +
-                getBuraco(secondPitPlayerB).getPedras() +
-                getBuraco(thirdPitPlayerB).getPedras()+
-                getBuraco(forthPitPlayerB).getPedras()+
-                getBuraco(fifthPitPlayerB).getPedras()+
-                getBuraco(sixthPitPlayerB).getPedras();
+    public Integer getSementesJogadorB() {
+        return getCova(primeiraCovaJogadorB).getSementes() +
+               getCova(segundaCovaJogadorB).getSementes()  +
+               getCova(terceiraCovaJogadorB).getSementes() +
+               getCova(quartaCovaJogadorB).getSementes()   +
+               getCova(quintaCovaJogadorB).getSementes()   +
+               getCova(sextaCovaJogadorB).getSementes();
     }
 
-    public MancalaBuraco getBuraco (Integer pitIndex){
-        return this.buracos.stream().filter(p -> p.getId() == pitIndex).findAny().get();
-    }
-
-    @JsonIgnore
-    public Integer getPedrasLadoEsquerdo (){
-        return getBuraco(leftPitHouseId).getPedras();
+    public MancalaCova getCova(Integer indiceCova) {
+        return this.covas.stream().filter(p -> p.getId() == indiceCova).findAny().get();
     }
 
     @JsonIgnore
-    public Integer getPedrasLadoDireito (){
-        return getBuraco(rightPitHouseId).getPedras();
+    public Integer getSementesLadoEsquerdo() {
+        return getCova(covaEsquerdaId).getSementes();
     }
 
     @JsonIgnore
-    public Integer getBuracoPedras(Integer indiceBuraco){
-        return getBuraco(indiceBuraco).getPedras();
+    public Integer getSementesLadoDireito() {
+        return getCova(covaDireitaId).getSementes();
+    }
+
+    @JsonIgnore
+    public Integer getSementesCova(Integer indiceCova){
+        return getCova(indiceCova).getSementes();
     }
 }

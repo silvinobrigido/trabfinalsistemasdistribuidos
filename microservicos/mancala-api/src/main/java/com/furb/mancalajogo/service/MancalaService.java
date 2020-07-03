@@ -24,15 +24,15 @@ public class MancalaService implements MancalaApi{
 		return jogo;
 	}
 	
-	@Cacheable (value = "kalahGames", key = "#id" , unless = "#result  == null")
+	@Cacheable (value = "mancalajogos", key = "#id" , unless = "#result  == null")
     public MancalaJogo loadGame(String id) throws RecursoNaoEncontradoException {
         Optional<MancalaJogo> gameOptional = repositorio.findById(id);
         if (!gameOptional.isPresent())
-            throw new RecursoNaoEncontradoException("Game id " + id + " not found!");
+            throw new RecursoNaoEncontradoException("Jogo " + id + " não encontrado!");
         return gameOptional.get();
     }
     
-    @CachePut(value = "kalahGames", key = "#kalahaGame.id")
+    @CachePut(value = "mancalajogos", key = "#mancalajogo.id")
     public MancalaJogo updateGame (MancalaJogo jogo){
     	jogo = repositorio.save(jogo);
         return jogo;

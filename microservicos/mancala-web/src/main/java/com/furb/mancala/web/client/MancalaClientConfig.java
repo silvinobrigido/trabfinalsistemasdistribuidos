@@ -30,7 +30,7 @@ public class MancalaClientConfig {
     public String getSowMancalaGameUrl(String gameId, Integer pitIndex){
         ServiceInstance instance = this.loadBalancer.choose(apiServiceId);
 
-        String url = String.format("http://%s:%s/games/%s/pits/%s", instance.getHost(), instance.getPort(), gameId, pitIndex);
+        String url = String.format("http://%s:%s/jogo/%s/covas/%s", instance.getHost(), instance.getPort(), gameId, pitIndex);
 
         return url;
     }

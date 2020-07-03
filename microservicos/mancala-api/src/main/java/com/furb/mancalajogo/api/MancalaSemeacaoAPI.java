@@ -4,6 +4,6 @@ import com.furb.mancalajogo.model.MancalaJogo;
 
 public interface MancalaSemeacaoAPI {
 	
-	MancalaJogo semeia(MancalaJogo jogo, int pitIndex);
+	MancalaJogo semeia(MancalaJogo jogo, int indiceCova);
   
 }

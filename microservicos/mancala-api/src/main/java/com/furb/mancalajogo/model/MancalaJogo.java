@@ -21,47 +21,48 @@ import lombok.Setter;
 public class MancalaJogo implements Serializable{
 	@Id
     private String id;
-    private List<MancalaBuraco> buracos;
+    private List<MancalaCova> covas;
     private PartidaJogador partidaJogador;
     @JsonIgnore
     private int indiceAtual;
     public MancalaJogo() {
-        this (defaultPitStones);
+        this (sementesPadraoCova);
     }
     public MancalaJogo(int pitStones) {
-        this.buracos = Arrays.asList(
-                new MancalaBuraco(firstPitPlayerA, pitStones),
-                new MancalaBuraco(secondPitPlayerA, pitStones),
-                new MancalaBuraco(thirdPitPlayerA, pitStones),
-                new MancalaBuraco(forthPitPlayerA, pitStones),
-                new MancalaBuraco(fifthPitPlayerA, pitStones),
-                new MancalaBuraco(sixthPitPlayerA, pitStones),
-                new MancalaCasa(rightPitHouseId),
-                new MancalaBuraco(firstPitPlayerB, pitStones),
-                new MancalaBuraco(secondPitPlayerB, pitStones),
-                new MancalaBuraco(thirdPitPlayerB, pitStones),
-                new MancalaBuraco(forthPitPlayerB, pitStones),
-                new MancalaBuraco(fifthPitPlayerB, pitStones),
-                new MancalaBuraco(sixthPitPlayerB, pitStones),
-                new MancalaCasa(leftPitHouseId));
+        this.covas = Arrays.asList(
+                new MancalaCova(primeiraCovaJogadorA, pitStones),
+                new MancalaCova(segundaCovaJogadorA, pitStones),
+                new MancalaCova(terceiraCovaJogadorA, pitStones),
+                new MancalaCova(quartaCovaJogadorA, pitStones),
+                new MancalaCova(quintaCovaJogadorA, pitStones),
+                new MancalaCova(sextaCovaJogadorA, pitStones),
+                new MancalaCasa(covaDireitaId),
+                new MancalaCova(primeiraCovaJogadorB, pitStones),
+                new MancalaCova(segundaCovaJogadorB, pitStones),
+                new MancalaCova(terceiraCovaJogadorB, pitStones),
+                new MancalaCova(quartaCovaJogadorB, pitStones),
+                new MancalaCova(quintaCovaJogadorB, pitStones),
+                new MancalaCova(sextaCovaJogadorB, pitStones),
+                new MancalaCasa(covaEsquerdaId));
     }
     public MancalaJogo(String id, Integer pitStones) {
         this (pitStones);
         this.id = id;
     }
     // returns the corresponding pit of particular index
-    public MancalaBuraco getBuraco(Integer pitIndex) throws MancalaApiException {
+    public MancalaCova getCova(Integer covaIdx) throws MancalaApiException {
         try {
-            return this.buracos.get(pitIndex-1);
+            return this.covas.get(covaIdx-1);
         }catch (Exception e){
-            throw  new MancalaApiException("Invalid pitIndex:"+ pitIndex +" has given!");
+            throw  new MancalaApiException("Indice de cova :"+ covaIdx +" inválido!");
         }
     }
+    
     @Override
     public String toString() {
-        return "KalahaGame{" +
-                ", pits=" + buracos +
-                ", playerTurn=" + partidaJogador +
+        return "MancalaJogo{" +
+                ", covas=" + covas +
+                ", partidaJogador=" + partidaJogador +
                 '}';
     }
 }

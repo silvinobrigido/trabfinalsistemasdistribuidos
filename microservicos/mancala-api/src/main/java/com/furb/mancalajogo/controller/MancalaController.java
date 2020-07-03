@@ -54,7 +54,7 @@ public class MancalaController {
         return ResponseEntity.ok(jogo);
     }
 
-    @PutMapping(value = "{gameId}/pits/{pitId}")
+    @PutMapping(value = "{gameId}/covas/{pitId}")
     @ApiOperation(value = "Endpoint for sowing the game. It keeps the history of the Game instance for consecutive requests. ",
             produces = "Application/JSON", response = MancalaJogo.class, httpMethod = "PUT")
     public ResponseEntity<MancalaJogo> semeaJogo(
@@ -64,7 +64,7 @@ public class MancalaController {
 
         log.info("Invoking sow() endpoint. GameId: " + gameId + "  , pit Index: " + pitId);
 
-        if (pitId == null || pitId < 1 || pitId >= MancalaConstantes.leftPitHouseId || pitId == MancalaConstantes.rightPitHouseId)
+        if (pitId == null || pitId < 1 || pitId >= MancalaConstantes.covaEsquerdaId || pitId == MancalaConstantes.covaDireitaId)
             throw new MancalaApiException("Invalid pit Index!. It should be between 1..6 or 8..13");
 
         MancalaJogo MancalaJogo = mancalaService.loadGame(gameId);

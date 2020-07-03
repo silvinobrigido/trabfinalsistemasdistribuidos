@@ -22,10 +22,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class MancalaJogoComponent extends VerticalLayout implements KeyNotifier {
 
-    private final BuracoLayoutComponent buracoLayoutComponent;
+    private final CovaLayoutComponent CovaLayoutComponent;
 
-    private final BuracoComponent rightHouse;
-    private final BuracoComponent leftHouse;
+    private final CovaComponent rightHouse;
+    private final CovaComponent leftHouse;
 
     final Label playerTurnLabel;
     final TextField playerTurnTextField;
@@ -33,8 +33,8 @@ public class MancalaJogoComponent extends VerticalLayout implements KeyNotifier 
     final Label winLabel;
 
 
-    public MancalaJogoComponent(BuracoLayoutComponent buracoLayoutComponent, @Autowired JogoController gameController) {
-        this.buracoLayoutComponent = buracoLayoutComponent;
+    public MancalaJogoComponent(CovaLayoutComponent CovaLayoutComponent, @Autowired JogoController gameController) {
+        this.CovaLayoutComponent = CovaLayoutComponent;
 
         this.playerTurnLabel = new Label("Jogador Partida:");
         this.playerTurnTextField = new TextField("");
@@ -45,15 +45,15 @@ public class MancalaJogoComponent extends VerticalLayout implements KeyNotifier 
         turnLayout.setAlignItems(Alignment.CENTER);
         add(turnLayout);
 
-        rightHouse = new BuracoComponent(7 , gameController);
+        rightHouse = new CovaComponent(7 , gameController);
         rightHouse.setAlignItems(Alignment.CENTER);
         rightHouse.add(new Label("Jogador A"));
 
-        leftHouse = new BuracoComponent(14, gameController);
+        leftHouse = new CovaComponent(14, gameController);
         leftHouse.setAlignItems(Alignment.CENTER);
         leftHouse.add(new Label("Jogador B"));
 
-        HorizontalLayout gameLayout = new HorizontalLayout(leftHouse, buracoLayoutComponent, rightHouse);
+        HorizontalLayout gameLayout = new HorizontalLayout(leftHouse, CovaLayoutComponent, rightHouse);
         gameLayout.setAlignItems(Alignment.CENTER);
 
         add(gameLayout);
@@ -77,9 +77,9 @@ public class MancalaJogoComponent extends VerticalLayout implements KeyNotifier 
     }
 
     public void preencheMancala(MancalaJogo jogo) {
-        this.leftHouse.setPedras(jogo.getPedrasLadoEsquerdo().toString());
-        this.rightHouse.setPedras(jogo.getPedrasLadoDireito().toString());
-        this.buracoLayoutComponent.fillPitStones(jogo);
+        this.leftHouse.setSementes(jogo.getSementesLadoEsquerdo().toString());
+        this.rightHouse.setSementes(jogo.getSementesLadoDireito().toString());
+        this.CovaLayoutComponent.preencheCovas(jogo);
     }
 
     public void novoJogo(MancalaJogo game) {
@@ -93,15 +93,15 @@ public class MancalaJogoComponent extends VerticalLayout implements KeyNotifier 
         this.preencheMancala(jogo);
         this.playerTurnTextField.setValue(evento.getJogo().getPartidaJogador());
 
-        Integer playerARemainingStones = jogo.getPedrasJogadorA();
-        Integer playerBRemainingStones = jogo.getPedrasJogadorB();
+        Integer playerARemainingStones = jogo.getSementesJogadorA();
+        Integer playerBRemainingStones = jogo.getSementesJogadorB();
 
         if (playerARemainingStones == 0 || playerBRemainingStones ==0){
-            Integer totalA = playerARemainingStones + jogo.getPedrasLadoDireito();
-            Integer totalB = playerBRemainingStones + jogo.getPedrasLadoEsquerdo();
+            Integer totalA = playerARemainingStones + jogo.getSementesLadoDireito();
+            Integer totalB = playerBRemainingStones + jogo.getSementesLadoEsquerdo();
 
-            this.leftHouse.setPedras(totalB.toString());
-            this.rightHouse.setPedras(totalA.toString());
+            this.leftHouse.setSementes(totalB.toString());
+            this.rightHouse.setSementes(totalA.toString());
 
             if (totalA > totalB)
                 this.winLabel.setText("Fim de Jogo! Jogador A Venceu!!!");
