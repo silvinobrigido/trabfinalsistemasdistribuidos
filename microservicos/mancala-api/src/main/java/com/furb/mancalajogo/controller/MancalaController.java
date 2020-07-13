@@ -70,8 +70,6 @@ public class MancalaController {
 
         mancalaService.updateGame(MancalaJogo);
 
-        log.info("sow is called for Game id:" + gameId + " , pitIndex:" + covaId);
-
         log.info(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(MancalaJogo));
 
         return ResponseEntity.ok(MancalaJogo);
@@ -81,7 +79,7 @@ public class MancalaController {
     @ApiOperation(value = "Endpoint for returning the latest status of the Game",
             produces = "Application/JSON", response = MancalaJogo.class, httpMethod = "GET")
     public ResponseEntity<MancalaJogo> gameStatus(
-            @ApiParam(value = "The id of game created by calling createGame() method. It's an String e.g. 5d34968590fcbd35b086bc21. It can't be empty or null",
+            @ApiParam(value = "",
                     required = true)
             @PathVariable(value = "id") String gameId) throws Exception {
 
