@@ -11,10 +11,10 @@ import org.springframework.context.ApplicationEvent;
 public class SemeaEvento extends ApplicationEvent {
 
     private MancalaJogo jogo;
-    private Integer pitIndex;
-    public SemeaEvento(Object source, MancalaJogo jogo, Integer pitIndex) {
+    private Integer indCova;
+    public SemeaEvento(Object source, MancalaJogo jogo, Integer indCova) {
         super(source);
         this.jogo = jogo;
-        this.pitIndex = pitIndex;
+        this.indCova = indCova;
     }
 }

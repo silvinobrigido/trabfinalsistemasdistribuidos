@@ -34,7 +34,7 @@ public class MancalaIntegrationTests {
 
     private final Resource mancalaCreate = new ClassPathResource("mancala-creation.json");
 
-    private final Resource mancalaSow2 = new ClassPathResource("mancala-sow-2.json");
+    private final Resource mancalaSemea = new ClassPathResource("mancala-sow-2.json");
 
     @MockBean
     MancalaClientConfig mancalaClientConfig;
@@ -50,7 +50,7 @@ public class MancalaIntegrationTests {
     @Test
     public void testManacalaCreation () throws Exception{
 
-        Mockito.when(mancalaClientConfig.getNewMancalaGameUrl()).thenReturn("http://localhost:8080/games");
+        Mockito.when(mancalaClientConfig.getMancalaURL()).thenReturn("http://localhost:8080/games");
 
         WireMock.stubFor(WireMock.post("/games")
                 .willReturn(WireMock.aResponse()
@@ -88,9 +88,9 @@ public class MancalaIntegrationTests {
     public void testManacalaSowPitIndex2 () throws Exception {
 
         // 1. Run the Mancala Creation Test
-        Mockito.when(mancalaClientConfig.getNewMancalaGameUrl()).thenReturn("http://localhost:8080/games");
+        Mockito.when(mancalaClientConfig.getMancalaURL()).thenReturn("http://localhost:8080/jogo");
 
-        WireMock.stubFor(WireMock.post("/games")
+        WireMock.stubFor(WireMock.post("/jogo")
                 .willReturn(WireMock.aResponse()
                         .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
                         .withStatus(HttpStatus.OK.value())
@@ -120,16 +120,14 @@ public class MancalaIntegrationTests {
         BDDAssertions.then(kalahaGame.getSementesLadoEsquerdo()).isEqualTo(0);
         BDDAssertions.then(kalahaGame.getSementesLadoDireito()).isEqualTo(0);
 
-        // 2. Run the Mancala Sow test for pit 2
+        Mockito.when(mancalaClientConfig.getSemeacaoMancalaURL(kalahaGame.getId(), 2)).
+                thenReturn("http://localhost:8080/jogo/"+kalahaGame.getId()+"/covas/2");
 
-        Mockito.when(mancalaClientConfig.getSowMancalaGameUrl(kalahaGame.getId(), 2)).
-                thenReturn("http://localhost:8080/games/"+kalahaGame.getId()+"/pits/2");
-
-        WireMock.stubFor(WireMock.put("/games/"+kalahaGame.getId()+"/pits/2")
+        WireMock.stubFor(WireMock.put("/jogo/"+kalahaGame.getId()+"/covas/2")
                 .willReturn(WireMock.aResponse()
                         .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
                         .withStatus(HttpStatus.OK.value())
-                        .withBody(asJson(mancalaSow2))
+                        .withBody(asJson(mancalaSemea))
                 ));
 
         MancalaJogo kalahaGameAfterSowingPit2 = mancalaClient.semeaJogoMancala(kalahaGame.getId(), 2);
@@ -152,7 +150,7 @@ public class MancalaIntegrationTests {
                 new MancalaCova(13 , 6),
                 new MancalaCova(14 , 0));
 
-        BDDAssertions.then(kalahaGameAfterSowingPit2.getPartidaJogador()).isEqualTo("PlayerB");
+        BDDAssertions.then(kalahaGameAfterSowingPit2.getPartidaJogador()).isEqualTo("JogadorB");
         BDDAssertions.then(kalahaGameAfterSowingPit2.getCovas()).isEqualTo(newMancalaCovas);
         BDDAssertions.then(kalahaGameAfterSowingPit2.getSementesLadoEsquerdo()).isEqualTo(0);
         BDDAssertions.then(kalahaGameAfterSowingPit2.getSementesLadoDireito()).isEqualTo(1);

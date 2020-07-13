@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/jogo")
-@Api(value = "Mancala game API. Set of endpoints for Creating and Sowing the Game")
+@Api(value = "")
 public class MancalaController {
 
     @Autowired	
@@ -37,43 +37,40 @@ public class MancalaController {
     private Integer pitStones;
 
     @PostMapping
-    @ApiOperation(value = "Endpoint for creating new Mancala game instance. It returns a MancalaJogo object with unique GameId used for sowing the game",
+    @ApiOperation(value = "",
             produces = "Application/JSON", response = MancalaJogo.class, httpMethod = "POST")
     public ResponseEntity<MancalaJogo> createGame() throws Exception {
 
-        log.info("Invoking create() endpoint... ");
+    
 
         MancalaJogo jogo = mancalaService.criarJogo(pitStones);
 
-        log.info("Game instance created. Id=" + jogo.getId());
-
-        log.info(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(jogo));
+       log.info(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(jogo));
 
         mancalaService.updateGame(jogo);
 
         return ResponseEntity.ok(jogo);
     }
 
-    @PutMapping(value = "{gameId}/covas/{pitId}")
-    @ApiOperation(value = "Endpoint for sowing the game. It keeps the history of the Game instance for consecutive requests. ",
+    @PutMapping(value = "{gameId}/covas/{covaId}")
+    @ApiOperation(value = " ",
             produces = "Application/JSON", response = MancalaJogo.class, httpMethod = "PUT")
     public ResponseEntity<MancalaJogo> semeaJogo(
-            @ApiParam(value = "The id of game created by calling createGame() method. It can't be empty or null", required = true)
-            @PathVariable(value = "gameId") String gameId,
-            @PathVariable(value = "pitId") Integer pitId) throws Exception {
+            @ApiParam(value = "", required = true)
+            @PathVariable(value = "jogoId") String gameId,
+            @PathVariable(value = "covaId") Integer covaId) throws Exception {
+        
 
-        log.info("Invoking sow() endpoint. GameId: " + gameId + "  , pit Index: " + pitId);
-
-        if (pitId == null || pitId < 1 || pitId >= MancalaConstantes.covaEsquerdaId || pitId == MancalaConstantes.covaDireitaId)
-            throw new MancalaApiException("Invalid pit Index!. It should be between 1..6 or 8..13");
+        if (covaId == null || covaId < 1 || covaId >= MancalaConstantes.covaEsquerdaId || covaId == MancalaConstantes.covaDireitaId)
+            throw new MancalaApiException("Erro!!!");
 
         MancalaJogo MancalaJogo = mancalaService.loadGame(gameId);
 
-        MancalaJogo = mancalaSowingService.semeia(MancalaJogo, pitId);
+        MancalaJogo = mancalaSowingService.semeia(MancalaJogo, covaId);
 
         mancalaService.updateGame(MancalaJogo);
 
-        log.info("sow is called for Game id:" + gameId + " , pitIndex:" + pitId);
+        log.info("sow is called for Game id:" + gameId + " , pitIndex:" + covaId);
 
         log.info(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(MancalaJogo));
 

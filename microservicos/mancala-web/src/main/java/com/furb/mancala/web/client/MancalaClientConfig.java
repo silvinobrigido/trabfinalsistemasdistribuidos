@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MancalaClientConfig {
-
+    
+	@Autowired
     private LoadBalancerClient loadBalancer;
 
     @Value("${mancala.api.service.id}")
@@ -19,7 +20,7 @@ public class MancalaClientConfig {
         this.loadBalancer = loadBalancer;
     }
 
-    public String getNewMancalaGameUrl(){
+    public String getMancalaURL(){
         ServiceInstance instance = this.loadBalancer.choose(apiServiceId);
 
         String url = String.format("http://%s:%s/jogo", instance.getHost(), instance.getPort());
@@ -27,7 +28,7 @@ public class MancalaClientConfig {
         return url;
     }
 
-    public String getSowMancalaGameUrl(String gameId, Integer pitIndex){
+    public String getSemeacaoMancalaURL(String gameId, Integer pitIndex){
         ServiceInstance instance = this.loadBalancer.choose(apiServiceId);
 
         String url = String.format("http://%s:%s/jogo/%s/covas/%s", instance.getHost(), instance.getPort(), gameId, pitIndex);

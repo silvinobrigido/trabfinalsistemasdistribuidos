@@ -47,7 +47,6 @@ public class MainView extends VerticalLayout {
 		
 		add(MancalaJogoComponent);
 
-		// build layout for actions
 		HorizontalLayout actions = new HorizontalLayout(startGameBtn);
 		add(actions);
         

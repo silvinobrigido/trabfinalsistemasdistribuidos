@@ -28,28 +28,28 @@ public class MancalaJogo implements Serializable{
     public MancalaJogo() {
         this (sementesPadraoCova);
     }
-    public MancalaJogo(int pitStones) {
+    public MancalaJogo(int sementesDaCova) {
         this.covas = Arrays.asList(
-                new MancalaCova(primeiraCovaJogadorA, pitStones),
-                new MancalaCova(segundaCovaJogadorA, pitStones),
-                new MancalaCova(terceiraCovaJogadorA, pitStones),
-                new MancalaCova(quartaCovaJogadorA, pitStones),
-                new MancalaCova(quintaCovaJogadorA, pitStones),
-                new MancalaCova(sextaCovaJogadorA, pitStones),
+                new MancalaCova(primeiraCovaJogadorA, sementesDaCova),
+                new MancalaCova(segundaCovaJogadorA, sementesDaCova),
+                new MancalaCova(terceiraCovaJogadorA, sementesDaCova),
+                new MancalaCova(quartaCovaJogadorA, sementesDaCova),
+                new MancalaCova(quintaCovaJogadorA, sementesDaCova),
+                new MancalaCova(sextaCovaJogadorA, sementesDaCova),
                 new MancalaCasa(covaDireitaId),
-                new MancalaCova(primeiraCovaJogadorB, pitStones),
-                new MancalaCova(segundaCovaJogadorB, pitStones),
-                new MancalaCova(terceiraCovaJogadorB, pitStones),
-                new MancalaCova(quartaCovaJogadorB, pitStones),
-                new MancalaCova(quintaCovaJogadorB, pitStones),
-                new MancalaCova(sextaCovaJogadorB, pitStones),
+                new MancalaCova(primeiraCovaJogadorB, sementesDaCova),
+                new MancalaCova(segundaCovaJogadorB, sementesDaCova),
+                new MancalaCova(terceiraCovaJogadorB, sementesDaCova),
+                new MancalaCova(quartaCovaJogadorB, sementesDaCova),
+                new MancalaCova(quintaCovaJogadorB, sementesDaCova),
+                new MancalaCova(sextaCovaJogadorB, sementesDaCova),
                 new MancalaCasa(covaEsquerdaId));
     }
-    public MancalaJogo(String id, Integer pitStones) {
-        this (pitStones);
+    public MancalaJogo(String id, Integer sementesDaCova) {
+        this (sementesDaCova);
         this.id = id;
     }
-    // returns the corresponding pit of particular index
+
     public MancalaCova getCova(Integer covaIdx) throws MancalaApiException {
         try {
             return this.covas.get(covaIdx-1);

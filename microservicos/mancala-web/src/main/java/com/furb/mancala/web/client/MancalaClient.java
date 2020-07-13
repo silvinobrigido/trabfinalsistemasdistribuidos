@@ -26,29 +26,29 @@ public class MancalaClient {
 
     public MancalaJogo iniciaNovoJogoMancala() throws Exception {
 
-        String url = mancalaClientConfig.getNewMancalaGameUrl();
+        String url = mancalaClientConfig.getMancalaURL();
 
-        log.info("calling:" + url);
+        log.info("Acesso:" + url);
 
-        ResponseEntity<MancalaJogo> gameResponse = this.restTemplate.postForEntity(url, null, MancalaJogo.class);
+        ResponseEntity<MancalaJogo> resposta = this.restTemplate.postForEntity(url, null, MancalaJogo.class);
 
-        log.info("response: " + new ObjectMapper().writerWithDefaultPrettyPrinter().
-                writeValueAsString(gameResponse.getBody()));
+        log.info("Resposta: " + new ObjectMapper().writerWithDefaultPrettyPrinter().
+                writeValueAsString(resposta.getBody()));
 
-        return gameResponse.getBody();
+        return resposta.getBody();
     }
 
-    public MancalaJogo semeaJogoMancala(String gameId, Integer pitIndex) throws Exception {
+    public MancalaJogo semeaJogoMancala(String codJogo, Integer indCova) throws Exception {
 
-        String url = mancalaClientConfig.getSowMancalaGameUrl(gameId, pitIndex);
+        String url = mancalaClientConfig.getSemeacaoMancalaURL(codJogo, indCova);
 
-        log.info("calling: " + url);
+        log.info("Acesso: " + url);
 
-        ResponseEntity<MancalaJogo> response = restTemplate.exchange(url, HttpMethod.PUT, null, MancalaJogo.class);
+        ResponseEntity<MancalaJogo> resposta = restTemplate.exchange(url, HttpMethod.PUT, null, MancalaJogo.class);
 
-        log.info("response: " + new ObjectMapper().writerWithDefaultPrettyPrinter().
-                writeValueAsString(response.getBody()));
+        log.info("Resposta: " + new ObjectMapper().writerWithDefaultPrettyPrinter().
+                writeValueAsString(resposta.getBody()));
 
-        return response.getBody();
+        return resposta.getBody();
     }
 }

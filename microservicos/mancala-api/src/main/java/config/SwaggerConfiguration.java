@@ -28,7 +28,7 @@ public class SwaggerConfiguration {
 
     private ApiInfo getApiInfo() {
         return new ApiInfo(
-                "Mancala Game Api service",
+                "Mancala",
                 "",
                 "1.0.0",
                 "TERMS OF SERVICE URL",

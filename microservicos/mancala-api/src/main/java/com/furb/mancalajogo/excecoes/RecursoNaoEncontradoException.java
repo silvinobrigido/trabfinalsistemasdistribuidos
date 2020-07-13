@@ -7,7 +7,7 @@ public class RecursoNaoEncontradoException extends Exception {
 	
     private static final long serialVersionUID = 1L;
 
-	public RecursoNaoEncontradoException(String message){
-	        super(message);
+	public RecursoNaoEncontradoException(String mensagem){
+	        super(mensagem);
 	}
 }
